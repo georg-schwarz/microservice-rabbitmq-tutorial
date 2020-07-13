@@ -44,7 +44,7 @@ Microservices strive for decoupling. However, they require standardization and a
 * As alternative, we could also use one exchange per domain / bounded context. But until we run into performance issues, we should keep it simple and use a global exchange. Naming it according to a microservice is a **bad** idea because this would introduce coupling by the need to know about the existance of another microservice. Keep it on domain-level instead.
 
 **Queues:**
-* One microservice type should have a queue per domain of interest that guarantees FIFO for all instances of its type. This also ensures all instances of a microservices representing a consumer group.
+* One microservice type should have a queue per domain of interest that guarantees FIFO for all instances of its type. This also ensures all instances of a microservices representing a consumer group. Configure the queue as non-exclusive for that (otherwise you have no competing-consumers)!
 * The queue should use the topic mechanism to filter events of no interest.
 * The queue connects to the global exchange (or to the matching domain exchange if multiple exist).
 * The queue is microservice-specific and, thus, can include the name of the microservice in its name. 
@@ -75,4 +75,16 @@ payload:
 ```
 
 
+## Experiment
 
+See the `./example` directory for the detailled demo project.
+We deployed 2 producing microserivce replicas and 10 consuming microservice replicas.
+
+The producing microservices sent messages with a text and a incrementing number. Thus, each message is sent twice, once by each producer:
+
+![Image of Producer Logs](./imgs/producer_logs.png)
+
+
+Meanwhile the consumers compete for the messages, so each message is only consumed once (and not ten times / once per consumer). Thus, each test string is listed twice in the logs (once from each of the two producers).
+
+![Image of Producer Logs](./imgs/consumer_logs.png)
