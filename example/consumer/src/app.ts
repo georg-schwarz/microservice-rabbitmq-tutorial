@@ -11,7 +11,7 @@ const sleep = (ms: number): Promise<void> => {
 
 const connect = async (amqpUrl: string): Promise<AMQP.Connection>  => {
     let retry = 0
-    while(retry < 10) {
+    while(retry < 30) {
         try {
             console.log("Attempting to connect to AMQP Broker.")
             const connection = await AMQP.connect(amqpUrl)
@@ -36,7 +36,7 @@ connect(AMQP_URL).then(async (connection: AMQP.Connection) => {
       });
 
     const q = await channel.assertQueue('consumer_queue', {
-        exclusive: true
+        exclusive: false
     })
     console.log("Consumer waiting for messages to arrive...");
 
