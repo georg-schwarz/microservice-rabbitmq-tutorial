@@ -37,8 +37,9 @@ connect(AMQP_URL).then(async (connection: AMQP.Connection) => {
       });
 
     for(let i = 0; i < 10e6; ++i) {
-        channel.publish(exchange, key, Buffer.from(testMsg));
-        console.log("[Producer] Sent %s:'%s'", key, testMsg);
-        sleep(100)
+        const msg = testMsg + " " + i
+        channel.publish(exchange, key, Buffer.from(msg));
+        console.log("[Producer] Sent %s:'%s'", key, msg);
+        await sleep(100)
     }
 })
