@@ -2,20 +2,26 @@ version: '3.7'
 
 services:
   producer:
+    image: microservice-amqp-tutorial-producer
     build:
       context: ./producer
     environment:
       AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
       AMQP_EXCHANGE: "all"
       AMQP_TOPIC: "billing.payment.executed"
+    deploy: # docker swarm
+      replicas: 2
 
   consumer:
+    image: microservice-amqp-tutorial-producer
     build:
       context: ./consumer
     environment:
       AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
       AMQP_EXCHANGE: "all"
       AMQP_TOPIC: "billing.payment.*"
+    deploy: # docker swarm
+      replicas: 10
 
   rabbitmq:
     image:  rabbitmq:management

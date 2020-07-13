@@ -41,7 +41,8 @@ connect(AMQP_URL).then(async (connection: AMQP.Connection) => {
     console.log("Consumer waiting for messages to arrive...");
 
     channel.bindQueue(q.queue, exchange, "#");
-    channel.consume(q.queue, (msg: AMQP.ConsumeMessage) => {
+    channel.consume(q.queue, async (msg: AMQP.ConsumeMessage) => {
         console.log("[Consumer] %s:'%s'", msg.fields.routingKey, msg.content.toString());
+        await sleep(10) // simulate small msg processing time
     })
 })
