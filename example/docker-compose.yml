@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  producer:
+    build:
+      context: ./producer
+    environment:
+      AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
+
+  rabbitmq:
+    image:  rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: 'rabbit_adm'
+      RABBITMQ_DEFAULT_PASS: 'password'
+    ports:
+      - "15672:15672"
+      - "5672:5672"
