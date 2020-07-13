@@ -4,7 +4,9 @@
   "description": "Event producing microservice",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "transpile": "tsc",
+    "start:transpiled": "node dist/app.js",
+    "start": "npm run transpile && npm run start:transpiled",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Georg Schwarz",
