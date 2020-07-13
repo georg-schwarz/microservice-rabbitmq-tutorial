@@ -12,7 +12,11 @@
   "author": "Georg Schwarz",
   "license": "MIT",
   "devDependencies": {
+    "@types/amqplib": "^0.5.13",
     "tslint": "^6.1.2",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.6"
   }
 }
