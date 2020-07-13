@@ -1,0 +1,22 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "description": "Event consuming microservice",
+  "main": "dist/index.js",
+  "scripts": {
+    "transpile": "tsc",
+    "start:transpiled": "node dist/app.js",
+    "start": "npm run transpile && npm run start:transpiled",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Georg Schwarz",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/amqplib": "^0.5.13",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.6"
+  }
+}

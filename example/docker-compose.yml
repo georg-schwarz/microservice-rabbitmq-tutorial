@@ -7,6 +7,12 @@ services:
     environment:
       AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
 
+  consumer:
+    build:
+      context: ./consumer
+    environment:
+      AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
+
   rabbitmq:
     image:  rabbitmq:management
     environment:
