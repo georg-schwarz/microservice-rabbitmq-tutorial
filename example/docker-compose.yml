@@ -6,12 +6,16 @@ services:
       context: ./producer
     environment:
       AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
+      AMQP_EXCHANGE: "all"
+      AMQP_TOPIC: "billing.payment.executed"
 
   consumer:
     build:
       context: ./consumer
     environment:
       AMQP_URL: "amqp://rabbit_adm:password@rabbitmq:5672"
+      AMQP_EXCHANGE: "all"
+      AMQP_TOPIC: "billing.payment.*"
 
   rabbitmq:
     image:  rabbitmq:management

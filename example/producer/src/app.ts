@@ -1,8 +1,8 @@
 import * as AMQP from 'amqplib'
 
 const AMQP_URL = process.env.AMQP_URL
-const exchange = "all"
-const key = "domainA.execution.success"
+const exchange = process.env.AMQP_EXCHANGE
+const key = process.env.AMQP_TOPIC
 const testMsg = "test"
 
 
