@@ -12,7 +12,7 @@ const sleep = (ms: number): Promise<void> => {
 
 const connect = async (amqpUrl: string): Promise<AMQP.Connection>  => {
     let retry = 0
-    while(retry < 10) {
+    while(retry < 30) {
         try {
             console.log("Attempting to connect to AMQP Broker.")
             const connection = await AMQP.connect(amqpUrl)
