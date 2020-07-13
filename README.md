@@ -1,4 +1,4 @@
-# Microservice AMQP Tutorial
+# Event-Driven Microservice Communication Design using AMQP
 
 This is a small proof of concept on how you can model event-driven choreography with AMQP for a microservice-based architecture.
 
@@ -52,7 +52,7 @@ Microservices strive for decoupling. However, they require standardization and a
 **Event Topics:**
 * Topics should be designed hierarchically. We propose somwthing like the following pattern `{domain}.{domainDetail}.{eventType}`. The concrete pattern should be project specific and be agreed on by every microservice team.
 * An example for a domain model changed event would be `billing.user_information.created`, or `billing.user_information.deleted`.
-* An example for a domain action event would be `billing.payment.executed` or ``billing.payment.failed`.
+* An example for a domain action event would be `billing.payment.executed` or `billing.payment.failed`.
 
 ### Event Detail Design
 
