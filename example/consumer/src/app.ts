@@ -6,7 +6,7 @@ const key = process.env.AMQP_TOPIC
 
 
 const sleep = (ms: number): Promise<void> => {
-    return new Promise(resolve => setTimeout(resolve, 1000));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 const connect = async (amqpUrl: string): Promise<AMQP.Connection>  => {
@@ -43,6 +43,6 @@ connect(AMQP_URL).then(async (connection: AMQP.Connection) => {
     channel.bindQueue(q.queue, exchange, "#");
     channel.consume(q.queue, async (msg: AMQP.ConsumeMessage) => {
         console.log("[Consumer] %s:'%s'", msg.fields.routingKey, msg.content.toString());
-        await sleep(10) // simulate small msg processing time
+        await sleep(100) // simulate small msg processing time
     })
 })

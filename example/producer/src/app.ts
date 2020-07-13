@@ -7,7 +7,7 @@ const testMsg = "test"
 
 
 const sleep = (ms: number): Promise<void> => {
-    return new Promise(resolve => setTimeout(resolve, 1000));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 const connect = async (amqpUrl: string): Promise<AMQP.Connection>  => {
@@ -40,6 +40,6 @@ connect(AMQP_URL).then(async (connection: AMQP.Connection) => {
         const msg = testMsg + " " + i
         channel.publish(exchange, key, Buffer.from(msg));
         console.log("[Producer] Sent %s:'%s'", key, msg);
-        await sleep(3)
+        await sleep(300)
     }
 })
